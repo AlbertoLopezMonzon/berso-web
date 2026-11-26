@@ -15,9 +15,11 @@
   <a class="skip" href="#main">Saltar al contenido</a>
 
   <main id="main">
-    <!-- Portada: logo y mensaje directo -->
+    <!-- Portada: logo de partículas 3D (si el navegador no lo soporta, se ve la imagen) y mensaje directo -->
     <section class="portada" id="inicio">
-      <img class="logo" data-anim src="assets/logo.jpeg" width="1600" height="550" alt="Berso, cocinas industriales e interiorismo">
+      <div class="logo3d" id="logo3d" data-anim>
+        <img class="logo logo--respaldo" src="assets/logo.jpeg" width="1600" height="540" alt="Berso, cocinas industriales e interiorismo">
+      </div>
       <h1 class="titular" data-anim>Hablemos.</h1>
       <p class="lead" data-anim>Cocinas industriales e interiorismo. Aquí tienes todo lo necesario para contactarnos, en un toque.</p>
       <span class="flecha" aria-hidden="true">↓</span>
@@ -77,6 +79,9 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r160/three.min.js"></script>
+  <script src="js/logo-puntos.js"></script>
+  <script src="js/particulas.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
