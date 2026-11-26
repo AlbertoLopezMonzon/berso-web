@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Berso. Tarjeta de presentación digital: contacto, llamada, WhatsApp y tarjeta de contacto en un toque.">
+  <meta name="theme-color" content="#000000">
+  <title>Berso · Tarjeta de presentación</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <main id="main">
+    <!-- Portada: logo y mensaje directo -->
+    <section class="portada" id="inicio">
+      <div class="logo" data-anim aria-label="Logo de Berso">
+        <!-- Sustituir por el logo cuando lo envíen: <img src="assets/logo.svg" alt="Berso"> -->
+        <span class="logo__texto">BERSO</span>
+      </div>
+      <h1 class="titular" data-anim>Hablemos.</h1>
+      <p class="lead" data-anim>Aquí tienes todo lo necesario para contactarnos, en un toque.</p>
+      <span class="flecha" aria-hidden="true">↓</span>
+    </section>
+
+    <!-- Quiénes somos: texto corto -->
+    <section class="bloque" id="quienes">
+      <h2 class="etiqueta" data-anim>Quiénes somos</h2>
+      <p class="texto" data-anim>[Texto breve sobre Berso: qué hacemos y para quién. Por confirmar con el cliente.]</p>
+    </section>
+
+    <!-- Servicios: bloques visuales sencillos -->
+    <section class="bloque" id="servicios">
+      <h2 class="etiqueta" data-anim>Servicios</h2>
+      <ul class="servicios">
+        <li data-anim><span class="servicios__n">01</span><span>[Servicio 1]</span></li>
+        <li data-anim><span class="servicios__n">02</span><span>[Servicio 2]</span></li>
+        <li data-anim><span class="servicios__n">03</span><span>[Servicio 3]</span></li>
+      </ul>
+    </section>
+
+    <!-- Contacto: datos, vCard y accesos directos -->
+    <section class="bloque bloque--contacto" id="contacto">
+      <h2 class="etiqueta" data-anim>Contacto</h2>
+      <p class="nombre" data-anim>[Nombre de la persona de contacto]</p>
+      <p class="cargo" data-anim>[Cargo]</p>
+
+      <div class="acciones" data-anim>
+        <a class="accion accion--sólido" href="#" id="btn-vcard">Guardar contacto</a>
+        <a class="accion" href="tel:+34600000000">Llamar</a>
+        <a class="accion" href="https://wa.me/34600000000" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="accion" href="mailto:hola@berso.example">Email</a>
+      </div>
+
+      <ul class="datos" data-anim>
+        <li><span>Teléfono</span><a href="tel:+34600000000">600 000 000</a></li>
+        <li><span>Email</span><a href="mailto:hola@berso.example">hola@berso.example</a></li>
+        <li><span>Dirección</span><span>[Dirección por confirmar]</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <nav aria-label="Legal">
+      <a href="#aviso-legal">Aviso legal</a>
+      <a href="#privacidad">Política de privacidad</a>
+    </nav>
+    <p>© 2026 Berso</p>
+    <div id="aviso-legal" class="legal">
+      <h2>Aviso legal</h2>
+      <p>[Texto del aviso legal: identidad del titular, CIF y domicilio. Por completar.]</p>
+    </div>
+    <div id="privacidad" class="legal">
+      <h2>Política de privacidad</h2>
+      <p>[Texto de privacidad: qué datos se recogen al contactar y para qué. Por completar.]</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

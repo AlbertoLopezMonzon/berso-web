@@ -1,0 +1,80 @@
+/* Berso · tarjeta de presentación digital.
+   Blanco y negro puros. Mobile first: el móvil es el uso principal.
+   Tipografía: Playfair Display para titulares (serif elegante) e Inter para el texto. */
+
+:root {
+  --negro: #000000;
+  --blanco: #ffffff;
+  --linea: #000000;
+  --serif: "Playfair Display", Georgia, serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--blanco); color: var(--negro); font: 400 1rem/1.6 var(--sans); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--negro); outline-offset: 3px; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--negro); color: var(--blanco); padding: .5rem 1rem; z-index: 10; }
+.skip:focus { left: 8px; }
+
+/* Portada */
+.portada {
+  min-height: 100svh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  padding: 0 1.5rem; position: relative;
+}
+.logo__texto { font: 700 1.1rem var(--sans); letter-spacing: .35em; }
+.titular { font: 700 clamp(2.6rem, 12vw, 5rem)/1.05 var(--serif); margin: 2.5rem 0 1rem; }
+.lead { font-size: 1.05rem; max-width: 30ch; margin: 0; }
+.flecha { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); font-size: 1.2rem; }
+
+/* Bloques */
+.bloque { padding: 4.5rem 1.5rem; border-top: 1px solid var(--linea); }
+.etiqueta { font: 600 .75rem var(--sans); letter-spacing: .25em; text-transform: uppercase; margin: 0 0 1.5rem; }
+.texto { font: 400 1.25rem/1.5 var(--serif); margin: 0; max-width: 32ch; }
+
+/* Servicios */
+.servicios { list-style: none; margin: 0; padding: 0; }
+.servicios li { display: flex; align-items: baseline; gap: 1rem; padding: 1.25rem 0; border-top: 1px solid var(--linea); font-size: 1.1rem; }
+.servicios li:last-child { border-bottom: 1px solid var(--linea); }
+.servicios__n { font: 600 .8rem var(--sans); letter-spacing: .1em; }
+
+/* Contacto */
+.nombre { font: 700 1.75rem/1.2 var(--serif); margin: 0; }
+.cargo { margin: .25rem 0 2rem; color: #000; }
+.acciones { display: grid; gap: .75rem; margin-bottom: 2.5rem; }
+.accion {
+  display: block; text-align: center; padding: 1rem; border: 1px solid var(--negro);
+  text-decoration: none; font-weight: 600; letter-spacing: .05em; background: var(--blanco);
+}
+.accion--sólido { background: var(--negro); color: var(--blanco); }
+.accion:active { transform: scale(.98); }
+.datos { list-style: none; margin: 0; padding: 0; }
+.datos li { display: grid; gap: .15rem; padding: .9rem 0; border-top: 1px solid var(--linea); }
+.datos li:last-child { border-bottom: 1px solid var(--linea); }
+.datos span:first-child { font: 600 .7rem var(--sans); letter-spacing: .2em; text-transform: uppercase; }
+.datos a { text-decoration: none; word-break: break-word; }
+
+/* Pie */
+.pie { padding: 2rem 1.5rem 3rem; border-top: 1px solid var(--linea); font-size: .8rem; }
+.pie nav { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+.pie nav a { text-decoration: underline; }
+.pie p { margin: 0; }
+.legal { display: none; margin-top: 1.5rem; }
+.legal:target { display: block; }
+.legal h2 { font: 600 .9rem var(--sans); margin: 0 0 .5rem; }
+.legal p { margin: 0; }
+
+/* Escritorio: la misma página, más ancha y centrada */
+@media (min-width: 760px) {
+  .portada, .bloque, .pie { padding-left: max(3rem, calc((100vw - 640px) / 2)); padding-right: max(3rem, calc((100vw - 640px) / 2)); }
+  .acciones { grid-template-columns: repeat(2, 1fr); }
+  .titular { font-size: 5.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
