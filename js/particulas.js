@@ -132,7 +132,10 @@
     for (let i = 0; i < n * 3; i++) pos[i] = destino[i];
     geometria.attributes.position.needsUpdate = true;
     renderer.render(escena, camara);
+    portada.classList.add('is-listo');
   } else {
     frame();
+    // Tras la intro (las partículas ya han formado el logo), se funde al logo nítido
+    setTimeout(() => portada.classList.add('is-listo'), 4200);
   }
 })();
