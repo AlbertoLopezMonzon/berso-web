@@ -2,6 +2,7 @@
 // El lienzo cubre toda la portada: las partículas empiezan repartidas por toda la pantalla
 // y se van juntando hasta formar el logo. Al pasar el ratón (o el dedo), las cercanas se apartan y vuelven.
 // Los puntos vienen de js/logo-puntos.js. Sin WebGL o con movimiento reducido se queda la imagen de respaldo.
+// En móvil la barra del navegador cambia la altura: por eso el tamaño se recalcula siempre (ResizeObserver).
 (() => {
   const portada = document.getElementById('inicio');
   const caja = document.getElementById('logo3d');
@@ -19,7 +20,13 @@
   } catch (e) {
     return; // sin WebGL: se queda la imagen de respaldo
   }
-  portada.insertBefore(renderer.domElement, portada.firstChild);
+  const lienzo = renderer.domElement;
+  lienzo.style.position = 'absolute';
+  lienzo.style.top = '0';
+  lienzo.style.left = '0';
+  lienzo.style.width = '100%';
+  lienzo.style.height = '100%';
+  portada.insertBefore(lienzo, portada.firstChild);
   portada.classList.add('is-3d');
 
   const escena = new THREE.Scene();
@@ -38,27 +45,28 @@
 
   let W = 1, H = 1, w = 1, h = 1;
 
-  // Tamaño de la portada en píxeles y en unidades del espacio 3D
+  // Tamaño real de la portada en este momento (píxeles y unidades 3D)
   function medir() {
-    w = portada.clientWidth; h = portada.clientHeight;
+    const nw = portada.clientWidth, nh = portada.clientHeight;
+    if (!nw || !nh) return;
+    w = nw; h = nh;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(w, h);
+    renderer.setSize(w, h, false);          // false: no toca el estilo; el CSS manda el tamaño
     camara.aspect = w / h;
     camara.updateProjectionMatrix();
     H = 2 * Math.tan((FOV * Math.PI / 180) / 2) * DISTANCIA;
     W = H * camara.aspect;
-    // La caja del logo mantiene su hueco en la maqueta
     caja.style.height = (caja.clientWidth * RATIO) + 'px';
     recalcularDestinos();
   }
 
-  // Dónde tiene que estar cada punto: en el sitio exacto de la caja del logo
+  // Dónde debe estar cada punto: en el sitio exacto de la caja del logo
   function recalcularDestinos() {
     const r = caja.getBoundingClientRect();
     const pr = portada.getBoundingClientRect();
     const cx = (r.left - pr.left) + r.width / 2;
     const cy = (r.top - pr.top) + r.height / 2;
-    const anchoW = (r.width / w) * W;          // ancho del logo en unidades 3D
+    const anchoW = (r.width / w) * W;
     const altoW = anchoW * RATIO;
     const centroX = (cx / w - .5) * W;
     const centroY = (.5 - cy / h) * H;
@@ -71,8 +79,8 @@
 
   // Punto de partida: repartidos por toda la pantalla, también fuera del logo
   window.PUNTOS_LOGO.forEach((_, i) => {
-    pos[i * 3] = (Math.random() - .5) * W * 1.5;
-    pos[i * 3 + 1] = (Math.random() - .5) * H * 1.5;
+    pos[i * 3] = (Math.random() - .5) * 3;
+    pos[i * 3 + 1] = (Math.random() - .5) * 4;
     pos[i * 3 + 2] = (Math.random() - .5) * 3;
   });
 
@@ -88,8 +96,11 @@
   portada.addEventListener('pointerdown', (e) => alPlano(e.clientX, e.clientY));
   portada.addEventListener('pointerleave', () => { raton.activo = false; });
 
-  medir();
+  // El tamaño se vuelve a medir cada vez que cambia la portada (móvil, giro, barra del navegador)
+  if ('ResizeObserver' in window) new ResizeObserver(medir).observe(portada);
   window.addEventListener('resize', medir);
+  window.addEventListener('load', medir);
+  medir();
 
   // Bucle: muelle hacia el logo + empuje del ratón con inercia
   const K = .035, AMORTIGUA = .86;
@@ -118,7 +129,6 @@
   };
 
   if (reducir) {
-    // Sin movimiento: los puntos se colocan directamente en el logo
     for (let i = 0; i < n * 3; i++) pos[i] = destino[i];
     geometria.attributes.position.needsUpdate = true;
     renderer.render(escena, camara);
