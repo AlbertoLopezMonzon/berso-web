@@ -39,7 +39,7 @@
   const vel = new Float32Array(n * 3);
   const geometria = new THREE.BufferGeometry();
   geometria.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  const material = new THREE.PointsMaterial({ size: .028, color: 0x000000, transparent: true, opacity: .95 });
+  const material = new THREE.PointsMaterial({ size: .012, color: 0x000000, transparent: true, opacity: 1 });
   const puntos = new THREE.Points(geometria, material);
   escena.add(puntos);
 
